@@ -17,3 +17,5 @@ typing-extensions
 langgraph-cli[inmem]
 fpdf
 ipykernel
+langchain-google-genai
+streamlit
