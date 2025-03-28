@@ -3,6 +3,7 @@ import os
 import logging
 import re
 from src.ui.run_workflow import run_workflow
+from src.llms.factory import get_llm  # Import get_llm directly
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 import pickle
 import json
@@ -16,11 +17,58 @@ if "chat_messages" not in st.session_state:
     st.session_state["chat_messages"] = []
 if "file_uploaded" not in st.session_state:
     st.session_state["file_uploaded"] = False
+if "groq_api_key" not in st.session_state:
+    st.session_state["groq_api_key"] = ""
+if "google_api_key" not in st.session_state:
+    st.session_state["google_api_key"] = ""
+if "openai_api_key" not in st.session_state:
+    st.session_state["openai_api_key"] = ""
 
 # Set page config
 st.set_page_config(
     page_title="AI Dev Workflow (Live + Persistent)", layout="wide")
 st.title("🚀 AI Dev Workflow with Live Chat & Refresh Persistence")
+
+# ========== API Key Input in Sidebar ==========
+st.sidebar.header("🔑 API Key Configuration")
+
+# GROQ API Key Input
+st.session_state["groq_api_key"] = st.sidebar.text_input(
+    "GROQ API Key",
+    value=st.session_state["groq_api_key"],
+    type="password",
+    help="Enter your GROQ API key for accessing Groq's services"
+)
+
+# Google API Key Input
+st.session_state["google_api_key"] = st.sidebar.text_input(
+    "Google API Key",
+    value=st.session_state["google_api_key"],
+    type="password",
+    help="Enter your Google API key for accessing Google services"
+)
+
+# # OpenAI API Key Input
+# st.session_state["openai_api_key"] = st.sidebar.text_input(
+#     "OpenAI API Key",
+#     value=st.session_state["openai_api_key"],
+#     type="password",
+#     help="Enter your OpenAI API key for accessing OpenAI services"
+# )
+
+# Modify run_workflow to accept API keys
+
+
+def modified_run_workflow(live_callback=None):
+    # Import inside function to avoid circular imports
+    from src.ui.run_workflow import run_workflow as original_workflow
+
+    # Create a context manager or modify the workflow to use passed API keys
+    os.environ["GROQ_API_KEY"] = st.session_state["groq_api_key"]
+    os.environ["GOOGLE_API_KEY"] = st.session_state["google_api_key"]
+    os.environ["OPENAI_API_KEY"] = st.session_state["openai_api_key"]
+
+    return original_workflow(live_callback=live_callback)
 
 # ========== File Loading Helper ==========
 
@@ -123,7 +171,7 @@ def run_and_save_workflow():
     logging.getLogger().addHandler(logger_handler)
 
     with st.spinner("Running the workflow with live chat..."):
-        result = run_workflow(live_callback=live_chat_renderer)
+        result = modified_run_workflow(live_callback=live_chat_renderer)
 
     # Save results to session state
     st.session_state["workflow_ran"] = True
@@ -133,6 +181,13 @@ def run_and_save_workflow():
     save_current_state()
 
     return result
+
+
+# Add warning about API keys
+st.sidebar.warning(
+    "⚠️ API keys are used to authenticate LLM services. "
+    "They are required for the workflow to run successfully."
+)
 
 
 # ========== Run on button click ==========
@@ -242,3 +297,6 @@ st.sidebar.write(f"Workflow ran: {st.session_state['workflow_ran']}")
 st.sidebar.write(f"File uploaded: {st.session_state['file_uploaded']}")
 st.sidebar.write(
     f"Has results: {st.session_state['workflow_result'] is not None}")
+st.sidebar.write(f"GROQ API Key set: {bool(st.session_state['groq_api_key'])}")
+st.sidebar.write(
+    f"Google API Key set: {bool(st.session_state['google_api_key'])}")
