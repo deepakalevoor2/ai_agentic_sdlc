@@ -17,9 +17,10 @@ API_KEYS = {
 }
 
 # Set environment variables
-for key, value in API_KEYS.items():
-    if value:
-        os.environ[key] = value
+# for key, value in API_KEYS.items():
+#     if value:
+#         os.environ[key] = value
+
 
 @lru_cache(maxsize=16)
 def get_llm(model_type, model_name=None):

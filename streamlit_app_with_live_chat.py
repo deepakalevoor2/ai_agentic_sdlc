@@ -470,7 +470,7 @@ def live_chat_renderer(messages):
 
     with chat_placeholder.container():
         st.markdown("### 💬 Live Chat Trace")
-        for msg in messages[-10:]:
+        for msg in messages[-20:]:
             role = msg.__class__.__name__
             icon = {
                 "HumanMessage": "🧑‍💻",
@@ -478,6 +478,50 @@ def live_chat_renderer(messages):
                 "AIMessage": "🤖"
             }.get(role, "💬")
             st.markdown(f"**{icon} {role}**\n\n{msg.content.strip()}\n\n---")
+
+# def live_chat_renderer(messages):
+#     # Save messages to session state for persistence
+#     st.session_state["chat_messages"] = messages
+
+#     with chat_placeholder.container():
+#         st.markdown("### 💬 Live Chat Trace")
+
+#         # Total messages
+#         total_messages = len(messages)
+
+#         # Show message count and selector
+#         st.write(f"Total messages: {total_messages}")
+
+#         # If we have more than 10 messages, add controls
+#         if total_messages > 10:
+#             col1, col2 = st.columns(2)
+#             with col1:
+#                 start_idx = st.number_input("Start from message:",
+#                                             min_value=0,
+#                                             max_value=max(0, total_messages-1),
+#                                             value=max(0, total_messages-10),
+#                                             key="live_chat_start")
+#             with col2:
+#                 count = st.number_input("Number of messages to show:",
+#                                         min_value=1,
+#                                         max_value=50,
+#                                         value=min(10, total_messages),
+#                                         key="live_chat_count")
+
+#             end_idx = min(start_idx + count, total_messages)
+#             display_messages = messages[start_idx:end_idx]
+#         else:
+#             display_messages = messages
+
+#         # Display the selected range of messages
+#         for msg in display_messages:
+#             role = msg.__class__.__name__
+#             icon = {
+#                 "HumanMessage": "🧑‍💻",
+#                 "SystemMessage": "⚙️",
+#                 "AIMessage": "🤖"
+#             }.get(role, "💬")
+#             st.markdown(f"**{icon} {role}**\n\n{msg.content.strip()}\n\n---")
 
 # ========== Run Workflow Function ==========
 
