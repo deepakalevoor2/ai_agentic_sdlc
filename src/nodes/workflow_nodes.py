@@ -182,7 +182,7 @@ def coder_node(state: GraphState) -> GraphState:
     logger.info(f"Generating code (iteration {code_review_iteration + 1})...")
 
     messages = [
-        SystemMessage(content="You are an expert python coder. Your job is to create python code for the given requirement, user stories and design document that will accurately implement the functionality. If peer review comments or security review feedbacks are provided, implement those changes to code accordingly."),
+        SystemMessage(content="You are an expert python coder. Your job is to create python code for the given requirement, user stories and design document that will accurately implement the functionality. If peer review comments or security review feedbacks are provided, implement those changes to code accordingly.Generate code in a modular way and provide doc string for each function and provide downloadable files."),
         HumanMessage(
             content=f"Generate the python code as per the requirement: {user_requirements}, user stories: {user_stories}, Functional and Technical Design: {design_doc}. If peer comments are provided in {code_review_comments} or security review aspect of code is present in {security_review_comments}, implement those changes too in the code.If QA testing is failed as per {qa_testing_result} fix the code.")
     ]

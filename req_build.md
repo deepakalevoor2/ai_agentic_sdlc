@@ -1,1 +1,1 @@
-Build Web app Snake and Ladder Game using Python and Flask
+Build Web app Snake and Ladder Game using Python with FastAPI as backend and create a nice UI with Tailwind CSS and NextJS for front end 
