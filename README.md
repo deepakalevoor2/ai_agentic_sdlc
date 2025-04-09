@@ -1,5 +1,6 @@
 
 # 🧠 AI Agentic SDLC
+For Live Demo - https://deepakalevoor2-ai-agentic-s-streamlit-app-with-live-chat-nr0k1v.streamlit.app/
 
 A fully automated, LLM-powered Software Development Life Cycle (SDLC) orchestrated using LangGraph and LangChain, visualized through a clean Streamlit interface.
 
@@ -93,3 +94,12 @@ This project is licensed under the MIT License.
 
 
 ![preview](https://github.com/user-attachments/assets/c0c399d3-686e-4a99-85a2-5fd5dc75ee3b)
+![Screenshot 2025-04-09 160304](https://github.com/user-attachments/assets/294734f2-459f-48c2-83f7-019e130c950d)
+
+![Screenshot 2025-04-09 162959](https://github.com/user-attachments/assets/bb6c167d-2097-43ee-a830-b7f48aa9c575)
+![Screenshot 2025-04-09 163204](https://github.com/user-attachments/assets/fffadbe0-4abf-46a4-b1ea-d9613daced95)
+
+![Screenshot 2025-04-09 163218](https://github.com/user-attachments/assets/f4bdaf8a-15b0-49e1-b128-0a96f68c21f1)
+![Screenshot 2025-04-09 163253](https://github.com/user-attachments/assets/94d56810-d780-4e70-b298-60b543b4883c)
+
+![Screenshot 2025-04-09 163340](https://github.com/user-attachments/assets/b0ba0ec7-0aa8-4d04-9223-6efd30508e30)
