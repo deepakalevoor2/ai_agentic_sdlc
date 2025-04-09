@@ -92,3 +92,4 @@ This project is licensed under the MIT License.
 ## 📸 Screenshots
 
 
+![preview](https://github.com/user-attachments/assets/c0c399d3-686e-4a99-85a2-5fd5dc75ee3b)
