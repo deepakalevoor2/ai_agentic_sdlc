@@ -17,20 +17,20 @@ class GraphState(TypedDict):
     user_requirement: str
     generated_user_stories: str
     po_review_comment: str
-    stories_correction_iteration: int
+    stories_correction_iteration: int=1
     design_doc: str
-    design_doc_review_iteration: int
+    design_doc_review_iteration: int=1
     design_doc_review_comments: str
     generated_code: str
     code_review_comments: str
-    code_review_iteration: int
+    code_review_iteration: int=1
     security_review_comments: str
-    security_review_iteration: int
+    security_review_iteration: int=1
     generated_test_cases: str
     test_case_review_comments: str
-    test_case_review_iteration: int
+    test_case_review_iteration: int=1
     qa_testing_result: str
-    qa_testing_iteration: int
+    qa_testing_iteration: int=1
     deployment_plan: str
     monitoring_plan: str
     maintenance_plan: str

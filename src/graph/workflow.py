@@ -147,11 +147,18 @@ def build_workflow_graph(live_callback=None):
         logger.info(
             f"QA Testing iteration: {state.get('qa_testing_iteration', 0)}")
         if APPROVED_PHRASES["qa_testing"] in state.get("qa_testing_result", "").lower():
-            print("QA Testing Passed")
+            logger.info("QA Testing Passed")
             return "deployment"
-        else:
-            print("QA Testing Failed")
+        # else:
+        #     logger.info("QA Testing Failed")
+        #     return "coder"
+        elif state.get('qa_testing_iteration', 0) < MAX_ITERATIONS:
+            logger.info("QA Testing Failed")
             return "coder"
+        else:
+            logger.warning(
+                "Max QA testing iteration reached, proceeding anyway")
+            return "deployment"
 
     # Define the edges
     builder.add_edge(START, "get_user_requirements")
